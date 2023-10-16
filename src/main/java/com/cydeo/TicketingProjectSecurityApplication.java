@@ -25,7 +25,7 @@ public class TicketingProjectSecurityApplication {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
+    }  //if we want to encode any password we can use this. ıt came with spring security
 
 
 }

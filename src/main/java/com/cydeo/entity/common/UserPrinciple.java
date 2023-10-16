@@ -20,8 +20,8 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorityList = new ArrayList<>();  // GrantedAuthority what spring undertstand always we use this.
-        GrantedAuthority authority = new SimpleGrantedAuthority(this.user.getRole().getDescription());
+        List<GrantedAuthority> authorityList = new ArrayList<>();  // GrantedAuthority what spring understand the roles always we use this.
+        GrantedAuthority authority = new SimpleGrantedAuthority(this.user.getRole().getDescription()); //SimpleGrantedAuthority says give me the role
         authorityList.add(authority);
         return authorityList;
     }

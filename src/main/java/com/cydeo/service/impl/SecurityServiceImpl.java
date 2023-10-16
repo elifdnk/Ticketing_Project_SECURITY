@@ -30,6 +30,6 @@ public class SecurityServiceImpl implements SecurityService {
         }
 
 
-        return new UserPrinciple(user);
+        return new UserPrinciple(user); //ger the user from DB and convert to user springs understand
     }
 }
