@@ -11,9 +11,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
     private final SecurityService securityService;
+    private final AuthSuccessHandler authSuccessHandler;
 
-    public SecurityConfig(SecurityService securityService) {
+    public SecurityConfig(SecurityService securityService, AuthSuccessHandler authSuccessHandler) {
         this.securityService = securityService;
+        this.authSuccessHandler = authSuccessHandler;
     }
 
 //    @Bean
@@ -58,7 +60,8 @@ public class SecurityConfig {
               //  .httpBasic()  //whenever we open default,spring give us sign in page.  (one pop up box)
                 .formLogin() //I am gonna login with form which is mine
                 .loginPage("/login") // our login page
-                .defaultSuccessUrl("/welcome")//whenever we successfully login, where we are gonna landed? now we want to land welcome page.
+               // .defaultSuccessUrl("/welcome")//whenever we successfully login, where we are gonna landed? now we want to land welcome page.  // we dont want everyone land this page.because of this we comment this.
+                .successHandler(authSuccessHandler) //looking for AuthenticationSuccessHandler we need to create one more config file. this one requesting one bean
                 .failureUrl("/login?error=true")//whenever our credentials wrong it says this.
                 .permitAll()// login page (now everyone go to login page)  it needs to be accessible for all
                 .and()
