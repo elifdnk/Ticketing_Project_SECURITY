@@ -19,7 +19,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities()); //whenever you did authentication,this method capture the role.
-        //we did Set<String> because maybe 1user can have more roles.
+        //we did Set<String> because maybe one user can have more roles.
 
         if(roles.contains("Admin")){
             response.sendRedirect("/user/create");

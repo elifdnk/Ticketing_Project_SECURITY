@@ -13,6 +13,7 @@ import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -103,7 +104,13 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectDTO> listAllProjectDetails() {
 
         //DB, give me all the projects assigned to manager login in the system.
-        UserDTO currentUserDTO = userService.findByUserName("harold@manager.com"); // this is will come with security in the future :)
+       // UserDTO currentUserDTO = userService.findByUserName("harold@manager.com"); // this is will come with security in the future :)
+
+        //now we change this hardcoded.
+        //hey spring how you can give me the user which login in the system :)
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        UserDTO currentUserDTO = userService.findByUserName(username);
+
         User user = userMapper.convertToEntity(currentUserDTO);
 
         List<Project> list = projectRepository.findAllByAssignedManager(user);  //give me all the projects assigned to this user
